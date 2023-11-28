@@ -1,0 +1,29 @@
+schema-version: v2
+kind: action
+metadata:
+  name: stk-action-poc
+  display-name: stk-action-poc
+  description: Describe your action explaining its purpose
+  version: 0.0.1
+spec:
+  type: shell
+  about: docs/about.md
+  usage: docs/usage.md
+  release-notes: docs/release-notes.md
+  requirements: docs/requirements.md
+  implementation: docs/implementation.md
+  inputs:
+    - label: Type some label
+      name: random-name
+      type: text
+      required: false
+      help: 'Inform your resource name (e.g.: Client)'
+  shell:
+    workdir: .
+    script:
+      linux: |
+        stk apply plugin lucas-santos/teste-poc/stk-test@0.0.1
+      mac: |
+        stk apply plugin lucas-santos/teste-poc/stk-test@0.0.1
+      windows: |
+        stk apply plugin lucas-santos/teste-poc/stk-test@0.0.1

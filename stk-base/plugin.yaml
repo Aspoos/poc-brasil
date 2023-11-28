@@ -1,0 +1,49 @@
+schema-version: v2
+kind: plugin
+metadata:
+  name: stk-template-poc
+  display-name: stk-template-poc
+  description: Describe your plugin explaining its purpose
+  version: 0.0.1
+  picture: plugin.png
+spec:
+  type: app
+  compatibility:
+    - python
+  about: docs/about.md
+  implementation: docs/implementation.md
+  release-notes: docs/release-notes-0.0.1.md
+  requirements: docs/requirements.md
+  single-use: False
+  technologies: # Ref: https://docs.stackspot.com/content-creator/studio/yaml-files/plugin-yaml/#technologies
+    - Api
+  stk-projects-only: false
+  inputs:
+    - label: Nome do projeto
+      name: project_name
+      type: text
+      required: true
+      help: 'Inform your project name'
+      global: true
+
+    - label: Golang Version
+      name: version_golang
+      type: select
+      items:
+        - '1.20'
+        - '1.19'
+        - '1.18'
+
+    - label: Nome do recurso
+      name: resource
+      type: text
+      required: true
+      help: 'Inform your resource name'
+      global: true
+
+    - label: Porta da aplicacao
+      name: port
+      type: text
+      required: true
+      help: 'Inform your port'
+      global: true

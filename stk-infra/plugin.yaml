@@ -1,0 +1,61 @@
+schema-version: v2
+kind: plugin
+metadata:
+  name: stk-infra
+  display-name: stk-infra
+  description: Describe your plugin explaining its purpose
+  version: 0.0.2
+  picture: plugin.png
+spec:
+  type: app
+  compatibility:
+    - python
+  about: docs/about.md
+  implementation: docs/implementation.md
+  release-notes: docs/release-notes-0.0.1.md
+  requirements: docs/requirements.md
+  single-use: False
+  technologies: # Ref: https://docs.stackspot.com/content-creator/studio/yaml-files/plugin-yaml/#technologies
+    - Api
+  stk-projects-only: false
+  inputs:
+    - label: Qual a infra ?
+      name: default_infra
+      type: text
+      items:
+        - "EKS"
+        - "ECS"
+        - "Nada"
+      required: true
+      help: 'Informe sua infra'
+  hooks:
+    - type: run
+      trigger-dirs: "."
+      trigger: after-render
+      commands:
+          - mkdir -p infra/dev
+          - mkdir -p infra/prod
+          - mkdir -p infra/hom
+          - touch infra/dev/kubernates.yaml
+          - touch infra/prod/kubernates.yaml
+          - touch infra/hom/kubernates.yaml
+      condition:
+        variable: default_infra
+        operator: "=="
+        value: "EKS"
+
+    - type: run
+      trigger-dirs: "."
+      trigger: after-render
+      commands:
+          - mkdir -p infra
+          - touch infra/ecs.yaml
+      condition:
+        variable: default_infra
+        operator: "=="
+        value: "ECS"
+    - type: run
+      trigger: after-render
+      commands:
+         - stk apply plugin lucas-santos/teste-poc/stk-test@0.0.1        
+
